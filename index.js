@@ -9,33 +9,41 @@ const  sanitizeString = (cadena)=>{
     return cadena.trim().toLowerCase();
 }
 
-// funcion recursiva que se llama a si misma hasta que se selecciona una bebida válida o se cancela el prompt
 const preguntaPorBebida = (message = 'que quieres beber?') => {
     const bebida = prompt(message);
-    const edad = prompt('que edad tienes');
-    const bebidaSanitize = sanitizeString(bebida)
+    const bebidaSanitize = sanitizeString(bebida);
+    
     if (bebidaSanitize === 'leche') {
         alert('aqui tiene su bebida')
-        
+        return preguntaPorBebida('Quieres otra bebida?');
+
     } else if (bebidaSanitize === 'coca-cola'){
+        const edad = prompt('que edad tienes?');
         if (edad >= 14){
             alert ('aqui tiene su bebida')
         } else if (edad <= 13) {
             alert ('solo puedes beber leche')
+        } else {
+            alert ('La edad no es correcta solo numeros')
         }
+        return preguntaPorBebida('Quieres otra bebida?');
 
     } else if (bebidaSanitize === 'cerveza') {
-        if (edad >= 18) {
+        const edad = prompt('que edad tienes?');
+        if (edad >= 18) {            
             alert ('aqui tiene su bebida')
         } else if (edad < 18 && edad >=14) {
             alert (' no puedes beber cerveza solo coca-cola o leche')
-        } else {
+        } else if (edad <= 13) {
             alert ('solo puedes beber leche')
+        } else {
+            alert ('La edad no es correcta solo numeros');
+            return edad = prompt('pon la edad correcta');
         }
-            
+        return preguntaPorBebida('Quieres otra bebida?');    
     } else {
         alert ('Solo servimos '+ bebidas);
-        prompt(message);
+        return preguntaPorBebida('Quieres otra bebida?');
     }
         
 } 
